@@ -64,6 +64,26 @@
 		  <h5 class="card-header">Logic</h5>
 		  <div class="card-body">
 		  	<p class="card-text">
+		  		<ul>
+		  			<li>We first check the smallest number (minN) and biggest number (maxN) in the list.
+		  				<ul>
+		  					<li>If the smallest is bigger than 1, which means 1 is the first missing positive, then return 1.</li>
+		  					<li>
+		  						Or if the biggest is smaller than 1, which means the whole list consists of zeros or negative numbers, then return 1.
+		  					</li>
+		  				</ul>
+		  			</li>
+		  			<li>
+		  				If the conditions above are not met, the else block will be executed.
+		  				<ul>
+		  					<li>We then keep the positive numbers and replace the original.</li>
+		  					<li>If the new biggest number equals the new list length, which means there is no missing positive among the list, return maxN+1.
+		  					</li>
+		  					<li>Otherwise, return the smallest missing positive using set. 
+		  					</li>
+		  				</ul>
+		  			</li>
+		  		</ul>
 		  	</p>
 		  </div>
 		</div>
