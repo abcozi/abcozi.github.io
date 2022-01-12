@@ -1,5 +1,14 @@
 #banner {
-	background-color: black;
+	background-color: darkslategrey;
 	color: ivory;
+	padding: 2%;
+}
+#footer {
+	text-align: center; 
+	background-color: darkslategrey; 
+	padding: 5%; 
+	color: ivory;
+}
+#listbox {
 	padding: 2%;
 }
