@@ -7,7 +7,10 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- prettify -->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Elaine's Virtual Minutes</title>
@@ -42,5 +45,60 @@
 	    </div>
 	  </div>
 	</nav>
+	<div class="container" style="padding: 1%">
+		<div class="row">
+			<div class="col-sm-3" style="padding-top: 1%">
+				<div class="list-group">
+				  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+				    Leetcode Solution | 41. First Missing Positive
+				  </a>
+				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 289. Game of Life</a>
+				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 371. Sum of Two Integers</a>
+				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 166. Fraction to Recurring Decimal</a>
+				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 62. Unique Paths</a>
+				</div>
+			</div>
+			<div class="col-sm-9" style="padding-top: 1%">
+				<div id="blogPostBox" class="container">
+					<div id="post1">
+						<div class="row">
+							<h3>Leetcode Solution | 41. First Missing Positive</h3>
+							<p>
+								<button type="button" class="btn btn-danger">Hard</button>
+								<button type="button" class="btn btn-light">Array</button>
+								<button type="button" class="btn btn-light">Hash Table</button>
+							</p>
+						</div>
+						<div class="row" style="padding: 3%">
+							<pre class="prettyprint">
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        minN = min(nums)
+        maxN = max(nums)
+        if minN > 1 or maxN < 1:
+            return 1
+        else:
+            nums = list(set([n for n in nums if n > 0]))
+            if maxN == len(nums):
+                return maxN+1
+            else:
+                return min(list(set([n for n in range(1, len(nums)+1)]) - set(nums)))
+							    
+							</pre>
+						</div>
+						<div class="row">
+							<div class="col-sm-9"></div>
+							<div class="col-sm-3" style="text-align: right; padding: 1%">
+								<a class="btn btn-light" href="https://abcozi.github.io" role="button">Read More >></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" class="container-fluid">
+	  Copyright © Elaine's Virtual Minutes 2022
+	</div>
   </body>
 </html>

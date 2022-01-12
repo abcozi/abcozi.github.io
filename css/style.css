@@ -6,9 +6,27 @@
 #footer {
 	text-align: center; 
 	background-color: darkslategrey; 
-	padding: 5%; 
+	padding: 4%; 
 	color: ivory;
 }
 #listbox {
 	padding: 2%;
+}
+pre.prettyprint{
+	border-color: lightgrey;
+	background-color: ghostwhite;
+
+}
+.list-group-item{
+	border-color: lightgrey;
+}
+.list-group-item.list-group-item-action.active{
+	background-color: darkslategrey;
+	border: none;
+}
+.list-group-item.list-group-item-action{
+	background-color: white;
+}
+.list-group-item.list-group-item-action.active:clicked{
+	background-color: white;
 }
