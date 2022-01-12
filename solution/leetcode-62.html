@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- prettify -->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Elaine's Virtual Minutes</title>
+  </head>
+  <body>
+    <div id="banner" class="container-fluid">
+	  <h1>Elaine's Virtual Minutes</h1>
+	  <div class="container">
+	  	<quote id="subTitle">Leetcode Solutions | Tech Ideas Sharing</quote>
+	  </div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="https://abcozi.github.io">
+	      <img src="../icon/home.png" alt="" width="30">
+	    </a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="https://abcozi.github.io"><b>Blog</b></a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="https://abcozi.github.io/projects.html"><b>Projects</b></a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="https://abcozi.github.io/about.html"><b>About</b></a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container" style="padding: 1%">
+		<div class="row">
+			<h3>Leetcode Solution | 62. Unique Paths</h3>
+			<p>
+				<button type="button" class="btn btn-warning">Medium</button>
+				<button type="button" class="btn btn-light">Math</button>
+				<button type="button" class="btn btn-light">Dynamic Programming</button>
+				<button type="button" class="btn btn-light">Combinatorics</button>
+			</p>
+		</div>
+		<div class="card">
+		  <h5 class="card-header">Link</h5>
+		  <div class="card-body">
+		  	<p class="card-text"><a href="https://leetcode.com/problems/unique-paths/">https://leetcode.com/problems/unique-paths/</a>
+		  </div>
+		</div>
+		<div class="card">
+		  <h5 class="card-header">Logic</h5>
+		  <div class="card-body">
+		  	<p class="card-text">
+		  		<ul>
+			  		<li>This is basically a math problem.</li>
+					<li>Let's say m=3, n=7.</li>
+					<li>Then there will be 2 ➡️ (rights) and 6 ⬇️(downs).</li>
+					<li>So the combinations of the actions (right or down) will be 8! / (2! * 6!)</li>
+				</ul>
+		  	</p>
+		  </div>
+		</div>
+		<div class="card">
+		  <h5 class="card-header">Python Code</h5>
+		  <div class="card-body">
+		  	<p class="card-text">
+		  		<pre class="prettyprint">
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        def level(n):
+            if n <= 1:
+                return 1
+            else:
+                return n*level(n-1)
+        return level(m-1+n-1)//(level(m-1)*level(n-1))		    
+			</pre>
+		  	</p>
+		  </div>
+		</div>
+	</div>
+	<div id="footer" class="container-fluid">
+	  Copyright © Elaine's Virtual Minutes 2022
+	</div>
+  </body>
+</html>

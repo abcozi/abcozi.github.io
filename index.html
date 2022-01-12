@@ -33,13 +33,13 @@
 	    <div class="collapse navbar-collapse" id="navbarNav">
 	      <ul class="navbar-nav">
 	        <li class="nav-item">
-	          <a class="nav-link active" aria-current="page" href="https://abcozi.github.io">Blog</a>
+	          <a class="nav-link active" aria-current="page" href="https://abcozi.github.io"><b>Blog</b></a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="https://abcozi.github.io/projects.html">Projects</a>
+	          <a class="nav-link" href="https://abcozi.github.io/projects.html"><b>Projects</b></a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="https://abcozi.github.io/about.html">About</a>
+	          <a class="nav-link" href="https://abcozi.github.io/about.html"><b>About</b></a>
 	        </li>
 	      </ul>
 	    </div>
@@ -47,242 +47,57 @@
 	</nav>
 	<div class="container" style="padding: 1%">
 		<div class="row">
-			<div class="col-sm-3" style="padding-top: 1%">
-				<div class="list-group">
-				  <a href="#" class="list-group-item list-group-item-action active" aria-current="true" style="background-color: darkslategray">
-				    Leetcode Solution | 41. First Missing Positive
-				  </a>
-				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 289. Game of Life</a>
-				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 371. Sum of Two Integers</a>
-				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 166. Fraction to Recurring Decimal</a>
-				  <a href="#" class="list-group-item list-group-item-action">Leetcode Solution | 62. Unique Paths</a>
-				</div>
-			</div>
-			<div class="col-sm-9" style="padding-top: 1%">
-				<div id="blogPostBox" class="container">
-					<div id="post1">
-						<div class="row">
-							<h3>Leetcode Solution | 41. First Missing Positive</h3>
-							<p>
-								<button type="button" class="btn btn-danger">Hard</button>
-								<button type="button" class="btn btn-light">Array</button>
-								<button type="button" class="btn btn-light">Hash Table</button>
-							</p>
-						</div>
-						<div class="row" style="padding: 3%">
-							<pre class="prettyprint">
-class Solution:
-    def firstMissingPositive(self, nums: List[int]) -> int:
-        minN = min(nums)
-        maxN = max(nums)
-        if minN > 1 or maxN < 1:
-            return 1
-        else:
-            nums = list(set([n for n in nums if n > 0]))
-            if maxN == len(nums):
-                return maxN+1
-            else:
-                return min(list(set([n for n in range(1, len(nums)+1)]) - set(nums)))	    
-							</pre>
-						</div>
-						<div class="row">
-							<div class="col-sm-9"></div>
-							<div class="col-sm-3" style="text-align: right; padding: 1%">
-								<a class="btn btn-light" href="https://abcozi.github.io" role="button">Read More >></a>
-							</div>
-						</div>
-					</div>
-					<div id="post2">
-						<div class="row">
-							<h3>Leetcode Solution | 289. Game of Life</h3>
-							<p>
-								<button type="button" class="btn btn-warning">Medium</button>
-								<button type="button" class="btn btn-light">Array</button>
-								<button type="button" class="btn btn-light">Matrix</button>
-								<button type="button" class="btn btn-light">Simulation</button>
-							</p>
-						</div>
-						<div class="row" style="padding: 3%">
-							<pre class="prettyprint">
-class Solution:
-    def gameOfLife(self, board: List[List[int]]) -> None:
-        """
-        Do not return anything, modify board in-place instead.
-        """
-        w, h = len(board[0]), len(board)
-        lives = []
-        deads = []
-        for i in range(h):
-            for j in range(w):
-                neighborCount = 0
-                for k in range(-1,2,1):
-                    for l in range(-1,2,1):
-                        if (k == 0 and l == 0) or not 0 <= i+k < h or not 0 <= j+l < w:
-                            continue
-                        if board[i+k][j+l] == 1:
-                            neighborCount += 1
-                if neighborCount == 3:
-                    lives.append([i, j])
-                elif neighborCount != 2 and board[i][j] == 1:
-                    deads.append([i, j])
-        for d in deads:
-            board[d[0]][d[1]] = 0
-        for l in lives:
-            board[l[0]][l[1]] = 1						    
-							</pre>
-						</div>
-						<div class="row">
-							<div class="col-sm-9"></div>
-							<div class="col-sm-3" style="text-align: right; padding: 1%">
-								<a class="btn btn-light" href="#" role="button">Read More >></a>
-							</div>
-						</div>
-					</div>
-					<div id="post3">
-						<div class="row">
-							<h3>Leetcode Solution | 371. Sum of Two Integers</h3>
-							<p>
-								<button type="button" class="btn btn-warning">Medium</button>
-								<button type="button" class="btn btn-light">Math</button>
-								<button type="button" class="btn btn-light">Bit Manipulation</button>
-							</p>
-						</div>
-						<div class="row" style="padding: 3%">
-							<pre class="prettyprint">
-class Solution:
-    def getSum(self, a: int, b: int) -> int:
-        self.level = -1
-        self.sum = 0
-        self.neg = False
-        self.subtract = False
-        def doSum(m, n):
-            if not m and not n:
-                return self.sum
-            elif not m and n:
-                return n
-            elif not n and m:
-                if m == 1:
-                    self.level += 1
-                    self.sum += 1*2**self.level
-                    return self.sum
-                else:
-                    return m
-            elif self.subtract:
-                carry = (m%2) ^ (n%2)
-                self.level += 1
-                self.sum += carry*2**self.level
-                if not m%2 and n%2:
-                    m = (m-1)>>1
-                else:
-                    m >>= 1
-                return doSum(m, n>>1)
-            else:
-                return doSum(m^n, (m&n)<<1)
-        if a < 0 and b < 0:
-            a, b = -a, -b
-            self.neg = True
-        if a*b < 0:
-            self.subtract = True
-            if abs(a) == abs(b):
-                return 0
-            elif abs(a) > abs(b):
-                if a < b:
-                    a, b = -a, b
-                    self.neg = True
-            else:
-                if a < b:
-                    a, b = b, -a
-                else:
-                    a, b = -b, a
-                    self.neg = True
-
-        self.sum = doSum(a, b)
-        return -self.sum if self.neg else self.sum    
-							</pre>
-						</div>
-						<div class="row">
-							<div class="col-sm-9"></div>
-							<div class="col-sm-3" style="text-align: right; padding: 1%">
-								<a class="btn btn-light" href="#" role="button">Read More >></a>
-							</div>
-						</div>
-					</div>
-					<div id="post4">
-						<div class="row">
-							<h3>Leetcode Solution | 166. Fraction to Recurring Decimal</h3>
-							<p>
-								<button type="button" class="btn btn-warning">Medium</button>
-								<button type="button" class="btn btn-light">Hash Table</button>
-								<button type="button" class="btn btn-light">Math</button>
-								<button type="button" class="btn btn-light">String</button>
-							</p>
-						</div>
-						<div class="row" style="padding: 3%">
-							<pre class="prettyprint">
-class Solution:
-    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
-        neg = True if numerator/denominator < 0 else False
-        numerator = -numerator if numerator < 0 else numerator
-        denominator = -denominator if denominator < 0 else denominator
-        out = str(numerator//denominator)
-        if numerator % denominator:
-            out += "."
-        remainders = []
-        quotients = []
-        numerator %= denominator
-        while numerator:
-            numerator *= 10
-            if str(numerator) in remainders:
-                duplicateStart = remainders.index(str(numerator))
-                out += "".join(quotients[:duplicateStart])
-                out += "("+"".join(quotients[duplicateStart:])+")"
-                return "-"+out if neg else out
-            else:
-                remainders.append(str(numerator))
-                quotients.append(str(numerator // denominator))
-                numerator %= denominator
-        out += "".join(quotients)
-        return "-"+out if neg else out					    
-							</pre>
-						</div>
-						<div class="row">
-							<div class="col-sm-9"></div>
-							<div class="col-sm-3" style="text-align: right; padding: 1%">
-								<a class="btn btn-light" href="#" role="button">Read More >></a>
-							</div>
-						</div>
-					</div>
-					<div id="post5">
-						<div class="row">
-							<h3>Leetcode Solution | 62. Unique Paths</h3>
-							<p>
-								<button type="button" class="btn btn-warning">Medium</button>
-								<button type="button" class="btn btn-light">Math</button>
-								<button type="button" class="btn btn-light">Dynamic Programming</button>
-								<button type="button" class="btn btn-light">Combinatorics</button>
-							</p>
-						</div>
-						<div class="row" style="padding: 3%">
-							<pre class="prettyprint">
-class Solution:
-    def uniquePaths(self, m: int, n: int) -> int:
-        def level(n):
-            if n <= 1:
-                return 1
-            else:
-                return n*level(n-1)
-        return level(m-1+n-1)//(level(m-1)*level(n-1))			    
-							</pre>
-						</div>
-						<div class="row">
-							<div class="col-sm-9"></div>
-							<div class="col-sm-3" style="text-align: right; padding: 1%">
-								<a class="btn btn-light" href="#" role="button">Read More >></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<a class="blogPostLink" href="solution/leetcode-41.html" style="text-decoration: none">
+				<h4>Leetcode Solution | 41. First Missing Positive</h4>
+				<p>
+					<button type="button" class="btn btn-danger">Hard</button>
+					<button type="button" class="btn btn-light">Array</button>
+					<button type="button" class="btn btn-light">Hash Table</button>
+				</p>
+			</a>
+		</div>
+		<div class="row">
+			<a class="blogPostLink" href="solution/leetcode-289.html" style="text-decoration: none">
+				<h4>Leetcode Solution | 289. Game of Life</h4>
+				<p>
+					<button type="button" class="btn btn-warning">Medium</button>
+					<button type="button" class="btn btn-light">Array</button>
+					<button type="button" class="btn btn-light">Matrix</button>
+					<button type="button" class="btn btn-light">Simulation</button>
+				</p>
+			</a>
+		</div>
+		<div class="row">
+			<a class="blogPostLink" href="solution/leetcode-371.html" style="text-decoration: none">
+				<h4>Leetcode Solution | 371. Sum of Two Integers</h4>
+				<p>
+					<button type="button" class="btn btn-warning">Medium</button>
+					<button type="button" class="btn btn-light">Math</button>
+					<button type="button" class="btn btn-light">Bit Manipulation</button>
+				</p>
+			</a>
+		</div>	
+		<div class="row">
+			<a class="blogPostLink" href="solution/leetcode-166.html" style="text-decoration: none">
+				<h4>Leetcode Solution | 166. Fraction to Recurring Decimal</h4>
+				<p>
+					<button type="button" class="btn btn-warning">Medium</button>
+					<button type="button" class="btn btn-light">Hash Table</button>
+					<button type="button" class="btn btn-light">Math</button>
+					<button type="button" class="btn btn-light">String</button>
+				</p>
+			</a>
+		</div>
+		<div class="row">
+			<a class="blogPostLink" href="solution/leetcode-62.html" style="text-decoration: none">
+				<h4>Leetcode Solution | 62. Unique Paths</h4>
+				<p>
+					<button type="button" class="btn btn-warning">Medium</button>
+					<button type="button" class="btn btn-light">Math</button>
+					<button type="button" class="btn btn-light">Dynamic Programming</button>
+					<button type="button" class="btn btn-light">Combinatorics</button>
+				</p>
+			</a>
 		</div>
 	</div>
 	<div id="footer" class="container-fluid">

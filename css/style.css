@@ -7,6 +7,7 @@
 	text-align: center; 
 	background-color: darkslategrey; 
 	padding: 4%; 
+	margin-top: 5%;
 	color: ivory;
 }
 #listbox {
@@ -17,16 +18,10 @@ pre.prettyprint{
 	background-color: ghostwhite;
 
 }
-.list-group-item{
-	border-color: lightgrey;
+.blogPostLink{
+	color: darkslategrey;
+	text-decoration: none;
 }
-.list-group-item.list-group-item-action.active{
-	background-color: darkslategrey;
-	border: none;
-}
-.list-group-item.list-group-item-action{
-	background-color: white;
-}
-.list-group-item.list-group-item-action.active:clicked{
-	background-color: white;
+.card{
+	margin: 1%;
 }
