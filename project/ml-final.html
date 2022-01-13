@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- prettify -->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Elaine's Virtual Minutes</title>
+  </head>
+  <body>
+    <div id="banner" class="container-fluid">
+	  <h1>Elaine's Virtual Minutes</h1>
+	  <div class="container">
+	  	<quote id="subTitle">Leetcode Solutions | Tech Ideas Sharing</quote>
+	  </div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="https://abcozi.github.io">
+	      <img src="../icon/home.png" alt="" width="30">
+	    </a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="https://abcozi.github.io"><b>Blog</b></a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="https://abcozi.github.io/projects.html"><b>Projects</b></a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="https://abcozi.github.io/about.html"><b>About</b></a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container" style="padding: 1%">
+		<div class="row">
+			<h3>Natural Language Processing with Disaster Tweets</h3>
+			<p>
+				<button type="button" class="btn btn-primary">Natural Language Processing</button>
+				<button type="button" class="btn btn-light">Machine Learning</button>
+			</p>
+		</div>
+		<div class="card">
+		  <h4 class="card-header">1. Introduction & Motivation</h4>
+		  <div class="card-body">
+		  	本任務目標是要為社交平台 Twitter 上面的推文 (Tweets) 分類「是否在講述一件天災人禍事件」兩個類別(是 /否)。隨著社群媒體的發展，很多使用者會在 Twitter 上面即時發布他們看到的天 災人禍事件(ex: 地震一發生，就會有人發佈貼文:「加州發生大地震了!」)， 這有助於消息的擴散，進而引起大眾關注，對於救災或訊息傳達有正面效益。但 是有時候，語言的表達會與字面上的意思不同，例如我們可能會看到一則貼文寫 著「On plus side look at the sky last night it was a blaze(看看這天空，它著火 (a blaze) 了!)」，但其實她想表達的是「天空的顏色跟火焰的顏色很像」，而不是真的天空 中發生火災。所以本任務要做的就是，給定一則貼文 (Tweet)，模型要判定它是 不是「在講述一件天災人禍事件」。
+		  </div>
+		</div>
+		<div class="card">
+		  <h4 class="card-header">2. Data Preprocessing</h4>
+		  <div class="card-body">
+		  	<p class="card-text">
+		  		<h5>2.1. Exploratory Data Analysis</h5>
+		  		<ul>
+					<li>Size of training dataset: 7613</li>
+					<li>Size of testing dataset: 3263</li>
+				</ul>
+		  		<h5>2.2. Data Proprocessing</h5>
+我們使用了基本的資料預處理和數個不同的 embedding 方法對文本做 encoding。
+				<ul>
+					<li>資料預處理:
+						<ul>
+					<li>Tokenization</li>
+					<li>移除 Stopwords(利用 nltk 套件的 Stopword list)</li>
+					<li>移除 urls</li>
+						</ul>
+					</li>
+					<li>
+						Embedding 方法:
+						<ul>
+							<li>Word2Vec (using pretrained model)</li>
+							<li>Word2Vec (self-trained)
+								<ul>
+							<li>Skip-gram, min_count=2, window=5</li>
+							<li>Cbow, min_count=1, window=5</li>
+								</ul>
+							</li>
+							<li>BERT pre-trained model (bert-large-uncased)</li>
+							<li>RoBERTa pre-trained model (roberta-large)</li>
+							<li>ALBERT pre-trained model (albert-large-v1)</li>
+						</ul>
+					</li>
+				</ul>
+		  	</p>
+		  </div>
+		</div>
+		<div class="card">
+		  <h4 class="card-header">3. Model Description</h4>
+		  <div class="card-body">
+		  	我們上游嘗試了不同的 embedding 方法，在下游也使用數個不同的classification model，試圖從不同做法所帶來的效果探討不同模型的好壞。
+		  	<ul>
+		  		<li>BERT – bert-large-uncased: <br>24-layer, 1024-hidden, 16-heads, 336M parameters</li>
+		  		<li>RoBERTa – roberta-large: <br>24-layer, 1024-hidden, 16-heads, 355M parameters</li>
+		  		<li>ALBERT – albert-large-v1: <br>24 repeating layers, 128 embedding, 1024-hidden, 16-heads, 17M parameters</li>
+		  		<li>LSTM: <br>num_layers=5, embedding_dim=250, hidden_dim=5, dropout=0.5</li>
+		  		<li>SVM: <br>C=1.0, kernel='rbf', degree=3, gamma='scale', tol=1e-3</li>
+		  	</ul>
+		  </div>
+		</div>
+		<div class="card">
+		  <h4 class="card-header">4. Experiment & Evaluation</h4>
+		  <div class="card-body">
+		  	<h5>4.1. Experiment</h5>
+			對於 BERT/RoBERTa/ALBERT，我們訓練所使用的參數為:
+			<ul>
+				<li>epoch = 4</li>
+				<li>batch_size = 16</li>
+				<li>eps = 1e-6</li>
+				<li>learning rate = 6e-6</li>
+				<li>optimizer = AdamW</li>
+			</ul>
+		  	<h5>4.2. Discussion</h5>
+		  	<h6>4.2.1. Word2Vec 的表現</h6>
+		  	<p>我們的實驗結果中，使用 Word2Vec 來 encode input data 的表現沒有很 好，我們認為原因可能是因為在 Word2Vec 訓練 embedding 的過程中，會 使用到 window，每個 window 會以一個句子為單位切出一組一組的鄰近 字彙。以window=5來說，若有一句 “I have a cute dog whose name is John”， Word2Vec 就會把他切成 “I have a cute dog”、“have a cute dog whose”、“a cute dog whose name”、“cute dog whose name is”、“dog whose name is John” 這幾個 sub-sequence 作為訓練 Word2Vec 模型的 input。對於這樣子的訓練流程來說，能夠分割句子，並且以句子為單位丟進去模型訓練就是很重要的事情。</p>
+		  	<p>但是我們在訓練資料中看到的 true data 包含了很多非正式的表達，而 不能夠像處理一些維基百科、新聞文章資料一樣，容易地看出一個句子的 結束，因為推特上面的使用者輸入的資料往往很隨性，不一定會在句子結 尾上加上句點、問號、驚嘆號等明顯的句子結尾符號。資料中還會存在一 些像是 “Omg this is terrible.....I can’t believe” 這種資料如果由人眼判斷的 話，可以知道是 “Omg this is terrible” 跟 “I can’t believe” 這兩個句子，但 是我們沒辦法把 “...” 直接當作是一個句子結尾，因為同時也會存在像是 用於句子間歇中的 “...” 的例子，例如 “And the winner goes to........Josh!!!!”。因此，我們很難明確對於資料集中的每則推文做句子的 分割，只能把整條推文當作一個句子放進去訓練。</p>
+		  	<p>再來第二個原因是，我們在 data 裡面可以發現很多非正式的表達，或 是流行用詞。例如 “Coooooooool!!”，但他其實是表示 “Cool” 的意思。雖 然我們如果搜集夠多資料，是有辦法訓練模型了解這些流行語表達的意思，讓 “Coooooooool!!” 跟 “Cool” 被訓練出的 embedding 有很高的 cosine similarity。但是在這個 task 上面，如果我們只用 training set + testing set 的 資料訓練 word2vec，單單只有 10000 筆左右的資料，況且每筆都是很短的 一句話，每句話至多 80 幾個字元。這樣子的資料量不足以訓練出強大的 word2vec embedding model，訓練出來的 embedding 也比較沒有代表性。</p>
+		  	<p>另外，embedding 的 size 也有可能會影響分類的結果，word2vec 一般 來說建議 embedding size 在 200~300 之間，我們本次訓練的是 250 大小的 embedding vector。而以 BERT 來說，他們訓練出的 embedding vector 長度 約在 700 多維，相較於 word2vec 的 250 維，提供了更多原始的字彙資訊。</p>
+		  	<h6>4.2.2. 預處理與否的差別</h6>
+		  	<p>在我們的實驗結果裡面，BERT 在沒有預處理(移除 stop words、超連 結、特殊字元)的狀況下得到比較好的結果。在報告時，許多同學也有提 到 informal expression 的問題，例如:gr8(其實是 great)、exce11ent(其 實是 excellent)這些非正規用詞的字彙，其實在 BERT 裡面是可以找到它 們的 embedding 的，而且能夠正確還原字彙的原意，所以有些常出現的非 正規詞彙反而可以保留，而不會變成噪音。</p>
+		  	<p>我們使用 bert as service 對於 “gr8”、 “exce11ent” 取他們的 embedding，與我們所期待的他們的字彙原型 “great”、“excellent” 比較他 們的 cosine similarity，發現我們得到高於 70% 的相似度，由此可知 BERT 不僅有收錄這些非正規表達詞彙，還訓練出了具有高度代表性的 embedding vector。</p>
+		  	<h6>4.2.3. Transformer 模型表現比較</h6>
+		  	<p>在我們的實驗結果中，BERT 取得最佳的表現，隨後是 RoBERTa，最後是 ALBERT。</p>
+		  	<p>以 RoBERTa 來說，根據 RoBERTa 的論文，他們使用了更多的訓練 資料 (CC-NEWS)、增加了 batch size、拉長了訓練時間、在更長的序列上 做訓練，並且使用了 dynamic masking，在 SQuAD、SST-2、MNLI-M、 RACE 上面取得了比 BERT 還要好的結果。整體上來說 RoBERTa 應是 BERT-based model 裡面更加 robust 的版本，但是在這次的實驗裡面，test F1-score 還是離 BERT 有些微的差距 (0.003)。但是我們並不認為可以單 就這點就質疑 RoBERTa 的分類能力，舉 validation F1-score 與 training loss 為例，可以發現我們最好的 RoBERTa fine-tuned model 其實是在所有 fine- tuned model 裡面，有最低的 training loss 跟最高的 validation F1-score 的模 型。所以或許在這份 testing set 上面，RoBERTa 的結果以很細微的差距敗 給了 BERT，但可能在其他份 testing set 上面，RoBERTa 是有可能贏過 BERT 的。再加上差距真的很小，F1-score 僅差 0.003，所以我們還是能夠 推論在這個任務上，RoBERTa 跟 BERT 是可以互相匹敵的。</p>
+		  	<p>而 ALBERT 的話，我們知道他是一個輕量化的 BERT-based model，改 進了 BERT 訓練過程中的 NSP，並且透過共享模型參數 (cross-layer parameter sharing)、分解矩陣 (factorized parameters)、模型剪枝 (weight pruning) 等方式減少了模型參數。而根據 ALBERT 的論文，albert-base 的版本在 SQuAD, MNLI, RACE 等資料集上的表現也的確比 bert-base, bert-large 還要差，這與我們的實驗結果是相符的。</p>
+		  </div>
+		</div>
+		<div class="card">
+		  <h4 class="card-header">5. Conclusion</h4>
+		  <div class="card-body">
+		  	<p>根據我們的實驗結果，我們在 BERT (bert-large-uncased)上面得到了最好的結 果，其次是 RoBERTa (roberta-large)、ALBERT (albert-large-v1)、ALBERT embedding 用 SVM 學習分類、Word2Vec 用 LSTM 學習分類，最後是 Word2Vec 用 SVM 學習分類。但其中 BERT 與 RoBERTa 的結果其實是可以互相匹敵的， 因為在 Testing set 的 F1-score 差距非常地細微，且 RoBERTa 在 validation set 上 面最佳 epoch 的 F1-score 以及 training set 上最佳 epoch 的 loss 也是所有模型裡面 最優秀的。</p>
+		  	<p>除此之外我們也認為若能使用 pretrained Word2Vec model 取代直接從資料集 訓練的 Word2Vec model，並且在訓練 Word2Vec 時針對句子斷句有更精細的處 理，可以提升模型表現。</p>
+		  	<p>截至本文撰寫時間 (2021/01/16 00:26) 為止，我們在 Kaggle Leaderboard 上面 的排名為 93 名，為 top 7%。</p>
+		  </div>
+		</div>
+	</div>
+	<div id="footer" class="container-fluid">
+	  Copyright © Elaine's Virtual Minutes 2022
+	</div>
+  </body>
+</html>
